@@ -1,0 +1,144 @@
+<template data-id="page-cyclister">
+    <div class="container mt-5 py-5">
+        <h1 class="h1">Tour de France Deltagere</h1>
+
+        <div id="wrapper">
+            <div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sorterCyclistModal">
+                    Sorter i deltagerliste
+                </button>
+            </div>
+            <form id="cyclist-form">
+                <div class="mb-3">
+                    <table class="table" id="table" style="display: block">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Navn</th>
+                            <th>Team</th>
+                        </tr>
+                        </thead>
+                        <tbody id="rows"></tbody>
+                    </table>
+
+
+                </div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCyclistModal">
+                    Tilføj Deltager
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editCyclistModal">
+                    Ændre Deltager
+                </button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCyclistModal">
+                    Slet Deltager
+                </button>
+                <button type="button" onclick="function reloadPage() {
+               location.reload();
+            }
+            reloadPage()" class="btn btn-primary">
+                    Opdater liste
+                </button>
+
+                <!-- Modal -->
+                <!-- Sort in cyclist participant list -->
+                <div class="modal fade" id="sorterCyclistModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="mb-3">
+                                    <h5 class="modal-title" id="exampleModalLabel">Sortering efter team</h5>
+                                    <select class="form-select" aria-label="Default select example" id="exampleFormControlInput">-
+                                        <option selected>Vælg team</option>
+                                        <option value="Quick-Step Alpha Vinyl Team">Quick-Step Alpha Vinyl Team</option>
+                                        <option value="Israel - Premier Tech">Israel - Premier Tech</option>
+                                        <option value="Jumbo-Visma">Jumbo-Visma</option>
+                                        <option value="EF Education-EasyPost">EF Education-EasyPost</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
+                                <button id="btn-sort" type="submit" class="btn btn-success" data-bs-dismiss="modal">Klik for sortering</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add cyclist to list -->
+                <div class="modal fade" id="addCyclistModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="mb-3">
+                                    <h5 class="modal-title" id="exampleModalLabel">Tilføj deltager</h5>
+                                    <label for="exampleFormControlInput1" class="form-label">Indsæt</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Deltagernavn">
+                                    <label for="exampleFormControlInput2" class="form-label">Indsæt</label>
+                                    <select class="form-select" aria-label="Default select example" id="exampleFormControlInput2">-
+                                        <option selected>Vælg team</option>
+                                        <option value="1">Quick-Step Alpha Vinyl Team</option>
+                                        <option value="2">Israel - Premier Tech</option>
+                                        <option value="3">Jumbo-Visma</option>
+                                        <option value="4">EF Education-EasyPost</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
+                                <button id="btn-add" type="submit" class="btn btn-success" data-bs-dismiss="modal">Gem deltager</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Update Cyclist -->
+                <div class="modal fade" id="editCyclistModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="mb-3">
+                                    <h5 class="modal-title" id="exampleModalLabel">Opdater deltager</h5>
+                                    <label for="exampleFormControlInput1" class="form-label">Indsæt</label>
+                                    <input type="navn" class="form-control" id="exampleFormControlInput3" placeholder="Id">
+                                    <label for="exampleFormControlInput1" class="form-label">Indsæt</label>
+                                    <input type="navn" class="form-control" id="exampleFormControlInput4" placeholder="Deltagernavn">
+                                    <label for="exampleFormControlInput2" class="form-label">Indsæt</label>
+                                    <select class="form-select" aria-label="Default select example" id="exampleFormControlInput5">-
+                                        <option selected>Vælg team</option>
+                                        <option value="1">Quick-Step Alpha Vinyl Team</option>
+                                        <option value="2">Israel - Premier Tech</option>
+                                        <option value="3">Jumbo-Visma</option>
+                                        <option value="4">EF Education-EasyPost</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
+                                <button id="btn-edit" type="submit" value="cyclist" class="btn btn-secondary" data-bs-dismiss="modal">Opdater deltager</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- delete Cyclist -->
+                <div class="modal" id="deleteCyclistModal" tabindex="-1" aria-labelledby="deleteTaskModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header border-0 text-center">
+                                <h5 class="modal-title w-100" id="deleteCyclistModalLabel">Slet deltager</h5>
+                                <label for="exampleFormControlInput1" class="form-label">Indsæt</label>
+                                <input type="navn" class="form-control" id="exampleFormControlInput6" placeholder="Id">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer border-0 justify-content-center">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
+                                <button id="btn-delete" type="submit" class="btn btn-danger" data-bs-dismiss="modal">Slet deltager</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</template>
